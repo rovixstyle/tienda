@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Producto — Polos Sublimados</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #111;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 700px;
+        margin: auto;
+        background: #1a1a1a;
+        padding: 20px;
+        border-radius: 15px;
+        border: 3px solid #f77f00;
+    }
+
+    img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        color: #f77f00;
+        margin-bottom: 10px;
+    }
+
+    .btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 12px 20px;
+        background: #f77f00;
+        color: #000;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+
+    .btn:hover {
+        background: #ff9500;
+        transform: scale(1.05);
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1 id="name"></h1>
+    <img id="image" src="" alt="Producto">
+    <a href="index.html" class="btn">⬅ Volver a la tienda</a>
+</div>
+
+<script>
+// Leer parámetros de la URL
+const params = new URLSearchParams(window.location.search);
+
+const urlImagen = params.get("id");
+const nombre = params.get("name");
+
+// Insertar en la página
+document.getElementById("name").textContent = nombre;
+document.getElementById("image").src = urlImagen;
+document.getElementById("image").alt = nombre;
+</script>
+
+</body>
+</html>
