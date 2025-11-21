@@ -3,75 +3,130 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Producto — Polos Sublimados</title>
+<title>Producto — Polo Sublimado</title>
 
 <style>
     body {
         margin: 0;
         font-family: Arial, sans-serif;
         background: #111;
-        color: #fff;
-        padding: 20px;
+        color: #f77f00;
         text-align: center;
-    }
-
-    .container {
-        max-width: 700px;
-        margin: auto;
-        background: #1a1a1a;
         padding: 20px;
-        border-radius: 15px;
-        
     }
 
-    img {
+    /* Luces navideñas */
+    .luces {
         width: 100%;
-        border-radius: 10px;
+        text-align: center;
         margin-bottom: 20px;
     }
 
-    h1 {
-        color: #f77f00;
-        margin-bottom: 10px;
+    .luces span {
+        display: inline-block;
+        width: 12px;
+        height: 25px;
+        margin: 0 5px;
+        border-radius: 50%;
+        background: red;
+        animation: parpadeo 0.9s infinite alternate;
+        box-shadow: 0 0 8px red;
     }
 
-    .btn {
-        display: inline-block;
+    .luces span:nth-child(2n) {
+        background: green;
+        box-shadow: 0 0 8px green;
+        animation-duration: 1.1s;
+    }
+
+    .luces span:nth-child(3n) {
+        background: gold;
+        box-shadow: 0 0 8px gold;
+        animation-duration: 0.8s;
+    }
+
+    @keyframes parpadeo {
+        0% { opacity: 0.3; transform: scale(0.9); }
+        100% { opacity: 1; transform: scale(1.2); }
+    }
+
+    h1 {
+        margin-bottom: 30px;
+    }
+
+    img {
+        width: 90%;
+        max-width: 450px;
+        border-radius: 15px;
+        border: 3px solid #f77f00;
+    }
+
+    .back {
         margin-top: 20px;
-        padding: 12px 20px;
+        display: inline-block;
+        padding: 10px 20px;
         background: #f77f00;
-        color: #000;
+        color: black;
+        font-weight: bold;
         border-radius: 8px;
         text-decoration: none;
-        font-weight: bold;
-        transition: 0.2s;
     }
 
-    .btn:hover {
-        background: #ff9500;
-        transform: scale(1.05);
+    /* ❄️ NIEVE */
+    .snowflake {
+        position: fixed;
+        top: -10px;
+        color: white;
+        font-size: 1em;
+        pointer-events: none;
+        z-index: 9999;
+        animation: caer linear infinite;
+    }
+
+    @keyframes caer {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(110vh); }
     }
 </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1 id="name"></h1>
-    <img id="image" src="" alt="Producto">
-    <a href="index.html" class="btn">⬅ Volver a la tienda</a>
+<!-- Luces navideñas -->
+<div class="luces">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
 </div>
 
+<h1 id="title">Producto</h1>
+
+<img id="imagen" src="" alt="Producto">
+
+<br><br>
+<a class="back" href="index.html">⬅ Volver</a>
+
 <script>
-// Leer parámetros de la URL
+// Obtener parámetros
 const params = new URLSearchParams(window.location.search);
+document.getElementById("imagen").src = params.get("img");
+document.getElementById("title").innerText = params.get("name");
 
-const urlImagen = params.get("id");
-const nombre = params.get("name");
+// ❄️ NIEVE
+function crearNieve() {
+    const snow = document.createElement("div");
+    snow.classList.add("snowflake");
+    snow.innerHTML = "❄";
 
-// Insertar en la página
-document.getElementById("name").textContent = nombre;
-document.getElementById("image").src = urlImagen;
-document.getElementById("image").alt = nombre;
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.fontSize = (Math.random() * 10 + 10) + "px";
+    snow.style.animationDuration = (Math.random() * 5 + 5) + "s";
+
+    document.body.appendChild(snow);
+
+    setTimeout(() => snow.remove(), 11000);
+}
+
+setInterval(crearNieve, 150);
 </script>
 
 </body>
