@@ -12,6 +12,7 @@
         background: #111;
         color: #f77f00;
         padding: 20px;
+        overflow-x: hidden;
     }
 
     h1 {
@@ -26,6 +27,42 @@
         margin-bottom: 30px;
     }
 
+    /* NAVIDAD — Luces animadas */
+    .luces {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .luces span {
+        display: inline-block;
+        width: 12px;
+        height: 25px;
+        margin: 0 5px;
+        border-radius: 50%;
+        background: red;
+        animation: parpadeo 0.9s infinite alternate;
+        box-shadow: 0 0 8px red;
+    }
+
+    .luces span:nth-child(2n) {
+        background: green;
+        box-shadow: 0 0 8px green;
+        animation-duration: 1.1s;
+    }
+
+    .luces span:nth-child(3n) {
+        background: gold;
+        box-shadow: 0 0 8px gold;
+        animation-duration: 0.8s;
+    }
+
+    @keyframes parpadeo {
+        0% { opacity: 0.3; transform: scale(0.9); }
+        100% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* Galería */
     .grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -63,10 +100,32 @@
         color: red;
         font-size: 1.2rem;
     }
+
+    /* ❄️ NIEVE */
+    .snowflake {
+        position: fixed;
+        top: -10px;
+        color: white;
+        font-size: 1em;
+        pointer-events: none;
+        z-index: 9999;
+        animation: caer linear infinite;
+    }
+
+    @keyframes caer {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(110vh); }
+    }
 </style>
 </head>
 
 <body>
+
+<!-- 🎄 Luces navideñas -->
+<div class="luces">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+</div>
 
 <h1>Tienda — Polos Sublimados</h1>
 <h2>Galería automática desde Google Drive</h2>
@@ -75,6 +134,7 @@
 <p id="error" class="error"></p>
 
 <script>
+// ⭐ URL de tu Web App de Google Apps Script
 const API_URL = "https://script.google.com/macros/s/AKfycbzwyh_i7wozL3Ot2gPar0r_5_q0WrbwRJMNDnnlyD_JrpvW7MYu5YLDUSbK1MuZjZd4/exec";
 
 async function cargarGaleria() {
@@ -88,11 +148,12 @@ async function cargarGaleria() {
         galeria.innerHTML = "";
 
         images.forEach((img, index) => {
-            const item = document.createElement("a");
+            const item = document.createElement("div");
             item.className = "item";
 
-            // → Enlace a producto.html
-            item.href = `producto.html?id=${encodeURIComponent(img.url)}&name=${encodeURIComponent(img.name)}`;
+            item.onclick = () => {
+                window.location.href = `producto.html?img=${encodeURIComponent(img.url)}&name=${encodeURIComponent(img.name)}`;
+            };
 
             item.innerHTML = `
                 <img src="${img.url}" alt="${img.name}">
@@ -109,6 +170,24 @@ async function cargarGaleria() {
 }
 
 cargarGaleria();
+
+
+// ❄️ NIEVE
+function crearNieve() {
+    const snow = document.createElement("div");
+    snow.classList.add("snowflake");
+    snow.innerHTML = "❄";
+
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.fontSize = (Math.random() * 10 + 10) + "px";
+    snow.style.animationDuration = (Math.random() * 5 + 5) + "s";
+
+    document.body.appendChild(snow);
+
+    setTimeout(() => snow.remove(), 11000);
+}
+
+setInterval(crearNieve, 150);
 </script>
 
 </body>
