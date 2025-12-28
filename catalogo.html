@@ -15,9 +15,7 @@ body {
   overflow-x: hidden;
 }
 
-/* =========================
-   TOPBAR
-========================= */
+/* TOPBAR */
 .topbar {
   position: fixed;
   top: 0;
@@ -27,42 +25,9 @@ body {
   padding: 10px 0;
   z-index: 1000;
 }
+.logo { width: 130px; }
 
-.logo {
-  width: 130px;
-}
-
-/* =========================
-   COUNTDOWN
-========================= */
-#countdownOverlay {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  z-index: 99999;
-}
-
-.countdown {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 8rem;
-  font-weight: 800;
-  letter-spacing: 0.2rem;
-  color: #fff;
-  animation: glow 1s infinite alternate;
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 10px #fff; }
-  to   { text-shadow: 0 0 35px #fff; }
-}
-
-/* =========================
-   GALERÍA
-========================= */
+/* GALERÍA */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -77,17 +42,11 @@ body {
   padding: 10px;
   cursor: pointer;
   position: relative;
-  transform-style: preserve-3d;
   overflow: hidden;
 }
 
-.item.spin {
-  animation: spin 1.5s ease forwards;
-}
-
-@keyframes spin {
-  to { transform: rotateY(720deg); }
-}
+.item.spin { animation: spin 1.5s ease forwards; }
+@keyframes spin { to { transform: rotateY(720deg); } }
 
 .item.fade {
   opacity: 0;
@@ -100,35 +59,13 @@ img {
   object-fit: cover;
   border-radius: 8px;
 }
-
 .name {
   text-align: center;
   margin-top: 8px;
   color: #fff;
 }
 
-/* =========================
-   2026 SLIDE IN
-========================= */
-.year-card {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 4.5rem;
-  font-weight: 900;
-  color: #fff;
-  opacity: 0;
-  transform: translateX(-40px);
-  animation: slideYear 1s ease forwards;
-  z-index: 5;
-  text-shadow:
-    0 0 15px #fff,
-    0 0 35px #fff;
-}
-
-
+/* 2026 OVERLAY */
 .year-overlay {
   position: fixed;
   display: flex;
@@ -137,45 +74,30 @@ img {
   pointer-events: none;
   z-index: 9999;
 }
-
-.year-overlay .year-card {
+.year-card {
   font-size: 4.5rem;
   font-weight: 900;
   color: #fff;
+  opacity: 0;
+  transform: translateX(-40px);
   animation: slideYear 1s ease forwards;
-  text-shadow:
-    0 0 15px #fff,
-    0 0 35px #fff;
+  text-shadow: 0 0 20px #fff, 0 0 40px #fff;
 }
-
-
-
 @keyframes slideYear {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-
-
-
-
-
-/* =========================
-   CANVAS FX
-========================= */
+/* PARTICULAS */
 #fxCanvas {
   position: fixed;
   inset: 0;
-  z-index: 1;
+  z-index: 5;
   pointer-events: none;
 }
 </style>
 </head>
 
 <body>
-
 
 <canvas id="fxCanvas"></canvas>
 
@@ -189,129 +111,97 @@ img {
 <div id="galeria" class="grid"></div>
 
 <script>
-/* =========================
-   COUNTDOWN
-========================= */
-const overlay = document.getElementById("countdownOverlay");
-const text = document.getElementById("countText");
-
-(function iniciarCountdown(){
-  let count = 3;
-  function step(){
-    text.textContent = count;
-    if(count === 0){
-      overlay.style.opacity = "0";
-      setTimeout(()=>{
-        overlay.remove();
-        cargarGaleria();
-      },800);
-      return;
-    }
-    count--;
-    setTimeout(step,900);
-  }
-  step();
-})();
-
-/* =========================
-   FIREWORKS (AUTO)
-========================= */
+/* PARTICULAS */
 const canvas = document.getElementById("fxCanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = innerWidth;
 canvas.height = innerHeight;
-window.onresize = ()=>{canvas.width=innerWidth;canvas.height=innerHeight};
+window.onresize = () => {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+};
 
-const particles=[];
-setInterval(()=>{
-  const x=Math.random()*canvas.width;
-  const y=Math.random()*canvas.height;
-  for(let i=0;i<40;i++){
+const particles = [];
+setInterval(() => {
+  const x = Math.random() * canvas.width;
+  const y = Math.random() * canvas.height;
+  for (let i = 0; i < 30; i++) {
     particles.push({
-      x,y,
-      vx:(Math.random()-0.5)*5,
-      vy:(Math.random()-0.5)*5,
-      life:60,
-      size:Math.random()*3+2
+      x, y,
+      vx: (Math.random() - 0.5) * 4,
+      vy: (Math.random() - 0.5) * 4,
+      life: 60,
+      size: Math.random() * 3 + 2
     });
   }
-},1200);
+}, 1000);
 
-(function animate(){
+(function animate() {
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach((p,i)=>{
+  particles.forEach((p,i) => {
     ctx.beginPath();
     ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
     ctx.fillStyle="rgba(255,255,255,0.8)";
     ctx.fill();
-    p.x+=p.vx; p.y+=p.vy; p.life--;
+    p.x += p.vx;
+    p.y += p.vy;
+    p.life--;
     if(p.life<=0) particles.splice(i,1);
   });
   requestAnimationFrame(animate);
 })();
 
-/* =========================
-   GALERÍA
-========================= */
+/* GALERÍA */
 const API_URL = "https://script.google.com/macros/s/AKfycbzwyh_i7wozL3Ot2gPar0r_5_q0WrbwRJMNDnnlyD_JrpvW7MYu5YLDUSbK1MuZjZd4/exec";
 
-async function cargarGaleria(){
+async function cargarGaleria() {
   const res = await fetch(API_URL);
   const images = await res.json();
   const g = document.getElementById("galeria");
-  g.innerHTML="";
 
-  images.forEach((img)=>{
-    const item=document.createElement("div");
-    item.className="item";
-    item.innerHTML=`
+  images.forEach(img => {
+    const item = document.createElement("div");
+    item.className = "item";
+    item.innerHTML = `
       <img src="${img.url}">
       <div class="name">${img.name}</div>
     `;
 
-   item.onclick = () => {
-  if (item.classList.contains("used")) return;
-  item.classList.add("used");
+    item.onclick = () => {
+      if(item.classList.contains("used")) return;
+      item.classList.add("used");
 
-  const rect = item.getBoundingClientRect();
+      const rect = item.getBoundingClientRect();
+      item.classList.add("spin");
 
-  // Giro
-  item.classList.add("spin");
+      setTimeout(() => {
+        const overlay = document.createElement("div");
+        overlay.className = "year-overlay";
+        overlay.style.left = rect.left + "px";
+        overlay.style.top = rect.top + "px";
+        overlay.style.width = rect.width + "px";
+        overlay.style.height = rect.height + "px";
 
-  // Crear overlay 2026 ANCLADO al card
-  setTimeout(() => {
-    const overlay = document.createElement("div");
-    overlay.className = "year-overlay";
-    overlay.style.left = rect.left + "px";
-    overlay.style.top = rect.top + "px";
-    overlay.style.width = rect.width + "px";
-    overlay.style.height = rect.height + "px";
+        const year = document.createElement("div");
+        year.className = "year-card";
+        year.textContent = "2026";
 
-    const year = document.createElement("div");
-    year.className = "year-card";
-    year.textContent = "2026";
+        overlay.appendChild(year);
+        document.body.appendChild(overlay);
+      }, 1200);
 
-    overlay.appendChild(year);
-    document.body.appendChild(overlay);
-  }, 1200);
+      setTimeout(() => item.classList.add("fade"), 1700);
 
-  // Fade + polvo del card
-  setTimeout(() => {
-    item.classList.add("fade");
-  }, 1800);
-
-  // Redirección
-  setTimeout(() => {
-    location.href = `producto.html?img=${encodeURIComponent(img.url)}&name=${encodeURIComponent(img.name)}`;
-  }, 3200);
-};
-
+      setTimeout(() => {
+        location.href = `producto.html?img=${encodeURIComponent(img.url)}&name=${encodeURIComponent(img.name)}`;
+      }, 3200);
+    };
 
     g.appendChild(item);
   });
 }
 
-  document.addEventListener("DOMContentLoaded", cargarGaleria);
+document.addEventListener("DOMContentLoaded", cargarGaleria);
 </script>
 
 </body>
