@@ -4,26 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- HTML Meta Tags -->
-<title>Rovix Style — Polos en Sublimados y DTF</title>
-<meta name="description" content="Catálogo actualizado de polos sublimados y DTF. Diseños únicos para esta Navidad y Año Nuevo">
-
-<!-- Facebook Meta Tags -->
-<meta property="og:url" content="https://rovixstyle.github.io/tienda/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Rovix Style — Polos en Sublimados y DTF">
-<meta property="og:description" content="Catálogo actualizado de polos sublimados y DTF. Diseños únicos para esta Navidad y Año Nuevo">
-<meta property="og:image" content="https://rovixstyle.github.io/tienda/img/metadato-rovix.jpg">
-
-<!-- Twitter Meta Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta property="twitter:domain" content="rovixstyle.github.io">
-<meta property="twitter:url" content="https://rovixstyle.github.io/tienda/">
-<meta name="twitter:title" content="Rovix Style — Polos en Sublimados y DTF">
-<meta name="twitter:description" content="Catálogo actualizado de polos sublimados y DTF. Diseños únicos para esta Navidad y Año Nuevo">
-<meta name="twitter:image" content="https://rovixstyle.github.io/tienda/img/metadato-rovix.jpg">
-
-<!-- Meta Tags Generated via https://www.opengraph.xyz -->
+<title>Rovix Style — Producto</title>
+<meta name="description" content="Producto seleccionado — Rovix Style">
 
 <style>
 body {
@@ -31,156 +13,147 @@ body {
   background: #000;
   color: #f77f00;
   font-family: Arial, sans-serif;
-  padding-top: 135px;
+  padding-top: 120px;
   overflow-x: hidden;
 }
 
- /* TOPBAR FIJO */
-    .topbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background: #000;
-        padding: 10px 0 0 0;
-        text-align: center;
-        z-index: 1000;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.7);
-    }
+/* =========================
+   CANVAS FX (PARTÍCULAS)
+========================= */
+#fxCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
 
-    .topbar img.logo {
-        width: 180px;
-        height: auto;
-        display: block;
-        margin: 0 auto 5px auto;
-    }
+/* =========================
+   TOPBAR
+========================= */
+.topbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #000;
+  padding: 15px 0;
+  text-align: center;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+}
 
+.topbar img.logo {
+  width: 160px;
+}
 
-    /* LUCES */
-    .luces {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        padding-bottom: 10px;
-    }
+/* =========================
+   CONTENIDO
+========================= */
+.contenedor {
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  z-index: 5;
+}
 
-    .luz {
-        width: 18px;
-        height: 28px;
-        border-radius: 50%;
-        animation: parpadeo 1s infinite alternate;
-    }
+.contenedor img {
+  width: 100%;
+  border-radius: 12px;
+  border: 3px solid #f77f00;
+}
 
-    .luz:nth-child(1) { background: red; animation-delay: 0.1s; }
-    .luz:nth-child(2) { background: green; animation-delay: 0.3s; }
-    .luz:nth-child(3) { background: yellow; animation-delay: 0.5s; }
-    .luz:nth-child(4) { background: blue; animation-delay: 0.7s; }
-    .luz:nth-child(5) { background: orange; animation-delay: 0.9s; }
+h1 {
+  color: #fff;
+  margin-bottom: 20px;
+}
 
-    @keyframes parpadeo {
-        from { opacity: 0.3; transform: scale(0.9); }
-        to { opacity: 1; transform: scale(1.1); }
-    }
+a.volver {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 22px;
+  background: #f77f00;
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
 
-    /* CONTENIDO */
-    .contenedor {
-        max-width: 700px;
-        margin: auto;
-        text-align: center;
-        padding: 20px;
-    }
-
-    .contenedor img {
-        width: 100%;
-        border-radius: 12px;
-        border: 3px solid #f77f00;
-    }
-
-    h1 {
-        color: #fff;
-        margin-bottom: 20px;
-    }
-
-    a.volver {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 10px 20px;
-        background: #f77f00;
-        color: #000;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-
-    a.volver:hover {
-        background: #ff9f2f;
-    }
-
-    /* NIEVE */
-    .snowflake {
-        position: fixed;
-        top: -10px;
-        color: white;
-        font-size: 1em;
-        opacity: 0.8;
-        pointer-events: none;
-        animation: caer linear infinite;
-    }
-
-    @keyframes caer {
-        to {
-            transform: translateY(110vh);
-            opacity: 0;
-        }
-    }
+a.volver:hover {
+  background: #ff9f2f;
+}
 </style>
 </head>
 
 <body>
 
+<canvas id="fxCanvas"></canvas>
+
 <!-- TOPBAR -->
 <div class="topbar">
-    <img src="img/LogoRovix-08.png" class="logo">
-
-    <div class="luces">
-        <div class="luz"></div>
-        <div class="luz"></div>
-        <div class="luz"></div>
-        <div class="luz"></div>
-        <div class="luz"></div>
-    </div>
+  <img src="img/LogoRovix-08.png" class="logo">
 </div>
 
+<!-- CONTENIDO -->
 <div class="contenedor">
-    <h1 id="nombre"></h1>
-    <img id="imagen" src="" alt="Producto">
-    <br>
-    <a href="catalogo.html" class="volver">← Volver a la tienda</a>
+  <h1 id="nombre"></h1>
+  <img id="imagen" alt="Producto">
+  <br>
+  <a href="catalogo.html" class="volver">← Volver a la tienda</a>
 </div>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-
+/* =========================
+   CARGA DE PRODUCTO
+========================= */
+const params = new URLSearchParams(location.search);
 document.getElementById("nombre").innerText = params.get("name");
 document.getElementById("imagen").src = params.get("img");
 
-/* NIEVE */
-function crearNieve() {
-    const copo = document.createElement("div");
-    copo.classList.add("snowflake");
-    copo.innerHTML = "❄";
+/* =========================
+   PARTÍCULAS (MISMO CATÁLOGO)
+========================= */
+const canvas = document.getElementById("fxCanvas");
+const ctx = canvas.getContext("2d");
 
-    copo.style.left = Math.random() * 100 + "vw";
-    copo.style.fontSize = (Math.random() * 10 + 10) + "px";
-    copo.style.animationDuration = (Math.random() * 5 + 5) + "s";
-
-    document.body.appendChild(copo);
-
-    setTimeout(() => copo.remove(), 12000);
+function resize(){
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
 }
+resize();
+window.addEventListener("resize", resize);
 
-setInterval(crearNieve, 200);
+const particles = [];
+
+setInterval(() => {
+  const x = Math.random() * canvas.width;
+  const y = Math.random() * canvas.height;
+  for (let i = 0; i < 40; i++) {
+    particles.push({
+      x, y,
+      vx: (Math.random() - 0.5) * 5,
+      vy: (Math.random() - 0.5) * 5,
+      life: 60,
+      size: Math.random() * 3 + 2
+    });
+  }
+}, 1200);
+
+(function animate(){
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach((p, i) => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(255,255,255,0.8)";
+    ctx.fill();
+    p.x += p.vx;
+    p.y += p.vy;
+    p.life--;
+    if (p.life <= 0) particles.splice(i, 1);
+  });
+  requestAnimationFrame(animate);
+})();
 </script>
 
 </body>
