@@ -83,6 +83,78 @@ a.volver {
 a.volver:hover {
   background: #ff9f2f;
 }
+
+
+
+
+/* BOTÓN FLOTANTE WHATSAPP */
+.whatsapp-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    z-index: 9999;
+    transition: transform 0.2s;
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.1);
+}
+
+/* MINI CHAT FLOTANTE */
+.chat-box {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 260px;
+    background: #000;
+    border: 2px solid #f77f00;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    display: none;
+    z-index: 9999;
+}
+
+.chat-box h3 {
+    margin: 0 0 10px 0;
+    color: #f77f00;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.chat-option {
+    background: #1a1a1a;
+    border: 1px solid #f77f00;
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 0.9rem;
+}
+
+.chat-option:hover {
+    background: #f77f00;
+    color: #000;
+}
+
+.imgbtnwsp {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+}  
+
+  
 </style>
 </head>
 
@@ -155,6 +227,51 @@ setInterval(() => {
   requestAnimationFrame(animate);
 })();
 </script>
+
+
+<!-- BOTÓN WA + CHAT -->
+<div class="whatsapp-btn" onclick="toggleChat()">
+    <img class="imgbtnwsp" src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
+         width="35" height="35" alt="WhatsApp">
+</div>
+
+<div id="chatBox" class="chat-box">
+    <h3>¿En qué te ayudo?</h3>
+
+    <div class="chat-option" onclick="sendWsp('Hola Rovix, ¿Aún tienen en stock de los polos?')">
+        ¿Aún tienen en stock?
+    </div>
+
+    <div class="chat-option" onclick="sendWsp('Hola Rovix, ¿Qué precio tienen los polos?')">
+        ¿Qué precio tiene?
+    </div>
+
+    <div class="chat-option" onclick="sendWsp('Hola Rovix, ¿En qué tallas tiene de sus polos?')">
+        ¿En qué tallas tiene?
+    </div>
+
+    <div class="chat-option" onclick="sendWsp('Hola Rovix, ¿Hace envíos de sus polos a nivel nacional?')">
+        ¿Hace envíos a nivel nacional?
+    </div>
+
+    <div class="chat-option" onclick="sendWsp('Hola Rovix, ¿Hacen delivery?')">
+        ¿Hacen delivery?
+    </div>
+</div>
+
+<script>
+const numero = "51931122426"; // <-- TU NÚMERO AQUÍ
+
+function toggleChat() {
+    const box = document.getElementById("chatBox");
+    box.style.display = box.style.display === "block" ? "none" : "block";
+}
+
+function sendWsp(texto) {
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+    window.open(url, "_blank");
+}
+</script>  
 
 </body>
 </html>
