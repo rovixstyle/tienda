@@ -35,17 +35,26 @@ body {
   overflow-x: hidden;
 }
 
-/* TOPBAR */
-.topbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: #000;
-  text-align: center;
-  padding: 10px 0;
-  z-index: 1000;
-}
-.logo { width: 130px; }
+ /* TOPBAR FIJO */
+    .topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #000;
+        padding: 10px 0 0 0;
+        text-align: center;
+        z-index: 1000;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+    }
+
+    .topbar img.logo {
+        width: 130px;
+        height: auto;
+        display: block;
+        margin: 0 auto 5px auto;
+    }
+
 
 /* GALERÍA */
 .grid {
