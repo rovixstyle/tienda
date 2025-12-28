@@ -9,49 +9,17 @@
 body {
   margin: 0;
   background: #000;
-  color: #f77f00;
-  font-family: Arial, sans-serif;
-  padding-top: 180px;
-  overflow-x: hidden;
-}
-
-/* =========================
-   TOPBAR
-========================= */
-.topbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: #000;
-  text-align: center;
-  padding: 10px 0;
-  z-index: 1000;
-}
-
-.logo {
-  width: 130px;
-}
-
-/* =========================
-   COUNTDOWN
-========================= */
-#countdownOverlay {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  z-index: 99999;
-}
-
-.countdown {
-  position: absolute;
-  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 8rem;
-  font-weight: 800;
-  letter-spacing: 0.2rem;
+  height: 100vh;
   color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.countdown {
+  font-size: 8rem;
+  font-weight: 900;
   animation: glow 1s infinite alternate;
 }
 
@@ -59,261 +27,31 @@ body {
   from { text-shadow: 0 0 10px #fff; }
   to   { text-shadow: 0 0 35px #fff; }
 }
-
-/* =========================
-   GALERÍA
-========================= */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
-
-.item {
-  background: #111;
-  border: 2px solid #f77f00;
-  border-radius: 10px;
-  padding: 10px;
-  cursor: pointer;
-  position: relative;
-  transform-style: preserve-3d;
-  overflow: hidden;
-}
-
-.item.spin {
-  animation: spin 1.5s ease forwards;
-}
-
-@keyframes spin {
-  to { transform: rotateY(720deg); }
-}
-
-.item.fade {
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-
-img {
-  width: 100%;
-  height: 240px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.name {
-  text-align: center;
-  margin-top: 8px;
-  color: #fff;
-}
-
-/* =========================
-   2026 SLIDE IN
-========================= */
-.year-card {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 4.5rem;
-  font-weight: 900;
-  color: #fff;
-  opacity: 0;
-  transform: translateX(-40px);
-  animation: slideYear 1s ease forwards;
-  z-index: 5;
-  text-shadow:
-    0 0 15px #fff,
-    0 0 35px #fff;
-}
-
-
-.year-overlay {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-.year-overlay .year-card {
-  font-size: 4.5rem;
-  font-weight: 900;
-  color: #fff;
-  animation: slideYear 1s ease forwards;
-  text-shadow:
-    0 0 15px #fff,
-    0 0 35px #fff;
-}
-
-
-
-@keyframes slideYear {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-
-
-
-
-
-/* =========================
-   CANVAS FX
-========================= */
-#fxCanvas {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
 </style>
 </head>
 
 <body>
 
-<!-- COUNTDOWN -->
-<div id="countdownOverlay">
-  <div id="countText" class="countdown">3</div>
-</div>
-
-<canvas id="fxCanvas"></canvas>
-
-<div class="topbar">
-  <img src="img/LogoRovix-08.png" class="logo">
-</div>
-
-<h1 style="text-align:center">Catálogo de Polos</h1>
-<h2 style="text-align:center;color:#ccc">2026 empieza con estilo</h2>
-
-<div id="galeria" class="grid"></div>
+<div id="count" class="countdown">3</div>
 
 <script>
-/* =========================
-   COUNTDOWN
-========================= */
-const overlay = document.getElementById("countdownOverlay");
-const text = document.getElementById("countText");
+let count = 3;
+const el = document.getElementById("count");
 
-(function iniciarCountdown(){
-  let count = 3;
-  function step(){
-    text.textContent = count;
-    if(count === 0){
-      overlay.style.opacity = "0";
-      setTimeout(()=>{
-        overlay.remove();
-        cargarGaleria();
-      },800);
-      return;
-    }
-    count--;
-    setTimeout(step,900);
+const interval = setInterval(() => {
+  count--;
+  if (count === 0) {
+    el.textContent = "0";
+    clearInterval(interval);
+
+    setTimeout(() => {
+      window.location.href = "catalogo.html";
+    }, 600);
+
+  } else {
+    el.textContent = count;
   }
-  step();
-})();
-
-/* =========================
-   FIREWORKS (AUTO)
-========================= */
-const canvas = document.getElementById("fxCanvas");
-const ctx = canvas.getContext("2d");
-canvas.width = innerWidth;
-canvas.height = innerHeight;
-window.onresize = ()=>{canvas.width=innerWidth;canvas.height=innerHeight};
-
-const particles=[];
-setInterval(()=>{
-  const x=Math.random()*canvas.width;
-  const y=Math.random()*canvas.height;
-  for(let i=0;i<40;i++){
-    particles.push({
-      x,y,
-      vx:(Math.random()-0.5)*5,
-      vy:(Math.random()-0.5)*5,
-      life:60,
-      size:Math.random()*3+2
-    });
-  }
-},1200);
-
-(function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach((p,i)=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-    ctx.fillStyle="rgba(255,255,255,0.8)";
-    ctx.fill();
-    p.x+=p.vx; p.y+=p.vy; p.life--;
-    if(p.life<=0) particles.splice(i,1);
-  });
-  requestAnimationFrame(animate);
-})();
-
-/* =========================
-   GALERÍA
-========================= */
-const API_URL = "https://script.google.com/macros/s/AKfycbzwyh_i7wozL3Ot2gPar0r_5_q0WrbwRJMNDnnlyD_JrpvW7MYu5YLDUSbK1MuZjZd4/exec";
-
-async function cargarGaleria(){
-  const res = await fetch(API_URL);
-  const images = await res.json();
-  const g = document.getElementById("galeria");
-  g.innerHTML="";
-
-  images.forEach((img)=>{
-    const item=document.createElement("div");
-    item.className="item";
-    item.innerHTML=`
-      <img src="${img.url}">
-      <div class="name">${img.name}</div>
-    `;
-
-   item.onclick = () => {
-  if (item.classList.contains("used")) return;
-  item.classList.add("used");
-
-  const rect = item.getBoundingClientRect();
-
-  // Giro
-  item.classList.add("spin");
-
-  // Crear overlay 2026 ANCLADO al card
-  setTimeout(() => {
-    const overlay = document.createElement("div");
-    overlay.className = "year-overlay";
-    overlay.style.left = rect.left + "px";
-    overlay.style.top = rect.top + "px";
-    overlay.style.width = rect.width + "px";
-    overlay.style.height = rect.height + "px";
-
-    const year = document.createElement("div");
-    year.className = "year-card";
-    year.textContent = "2026";
-
-    overlay.appendChild(year);
-    document.body.appendChild(overlay);
-  }, 1200);
-
-  // Fade + polvo del card
-  setTimeout(() => {
-    item.classList.add("fade");
-  }, 1800);
-
-  // Redirección
-  setTimeout(() => {
-    location.href = `producto.html?img=${encodeURIComponent(img.url)}&name=${encodeURIComponent(img.name)}`;
-  }, 3200);
-};
-
-
-    g.appendChild(item);
-  });
-}
+}, 900);
 </script>
 
 </body>
