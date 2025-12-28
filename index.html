@@ -3,355 +3,318 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- HTML Meta Tags -->
-<title>Rovix Style — Polos en Sublimados y DTF</title>
-<meta name="description" content="Catálogo actualizado de polos sublimados y DTF. Diseños únicos para esta Navidad y Año Nuevo">
-
-<!-- Facebook Meta Tags -->
-<meta property="og:url" content="https://rovixstyle.github.io/tienda/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Rovix Style — Polos en Sublimados y DTF">
-<meta property="og:description" content="Catálogo actualizado de polos sublimados y DTF. Diseños únicos para esta Navidad y Año Nuevo">
-<meta property="og:image" content="https://rovixstyle.github.io/tienda/img/metadato-rovix.jpg">
-
-<!-- Twitter Meta Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta property="twitter:domain" content="rovixstyle.github.io">
-<meta property="twitter:url" content="https://rovixstyle.github.io/tienda/">
-<meta name="twitter:title" content="Rovix Style — Polos en Sublimados y DTF">
-<meta name="twitter:description" content="Catálogo actualizado de polos sublimados y DTF. Diseños únicos para esta Navidad y Año Nuevo">
-<meta name="twitter:image" content="https://rovixstyle.github.io/tienda/img/metadato-rovix.jpg">
-
-<!-- Meta Tags Generated via https://www.opengraph.xyz -->
-
+<title>Rovix Style</title>
 
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #111;
-        color: #f77f00;
-        padding-top: 180px; /* espacio para la barra fija */
-        overflow-x: hidden;
-    }
-
-    /* TOPBAR FIJO */
-    .topbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background: #000;
-        padding: 10px 0 0 0;
-        text-align: center;
-        z-index: 1000;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.7);
-    }
-
-    .topbar img.logo {
-        width: 130px;
-        height: auto;
-        display: block;
-        margin: 0 auto 5px auto;
-    }
-
-    /* LUCES NAVIDEÑAS */
-    .luces {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        padding-bottom: 10px;
-    }
-
-    .luz {
-        width: 18px;
-        height: 28px;
-        border-radius: 50%;
-        animation: parpadeo 1s infinite alternate;
-    }
-
-    .luz:nth-child(1) { background: red; animation-delay: 0.1s; }
-    .luz:nth-child(2) { background: green; animation-delay: 0.3s; }
-    .luz:nth-child(3) { background: yellow; animation-delay: 0.5s; }
-    .luz:nth-child(4) { background: blue; animation-delay: 0.7s; }
-    .luz:nth-child(5) { background: orange; animation-delay: 0.9s; }
-
-    @keyframes parpadeo {
-        from { opacity: 0.3; transform: scale(0.9); }
-        to { opacity: 1; transform: scale(1.1); }
-    }
-
-    /* TÍTULOS */
-    h1 {
-        text-align: center;
-        font-size: 2.2rem;
-        margin-top: 0;
-    }
-
-    h2 {
-        text-align: center;
-        color: #ccc;
-        margin-bottom: 30px;
-    }
-
-    /* GALERÍA */
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        gap: 20px;
-        padding: 20px;
-    }
-
-    .item {
-        background: #1a1a1a;
-        padding: 10px;
-        border-radius: 10px;
-        text-align: center;
-        border: 2px solid #f77f00;
-        transition: transform 0.2s;
-        cursor: pointer;
-    }
-
-    .item:hover {
-        transform: scale(1.05);
-    }
-
-    img {
-        width: 100%;
-        height: 240px;
-        object-fit: cover;
-        border-radius: 8px;
-    }
-
-    .name {
-        margin-top: 8px;
-        color: #fff;
-    }
-
-    .error {
-        text-align: center;
-        color: red;
-        font-size: 1.2rem;
-    }
-
-    /* NIEVE */
-    .snowflake {
-        position: fixed;
-        top: -10px;
-        color: white;
-        font-size: 1em;
-        opacity: 0.8;
-        pointer-events: none;
-        animation: caer linear infinite;
-    }
-
-    @keyframes caer {
-        to {
-            transform: translateY(110vh);
-            opacity: 0;
-        }
-    }
-
-   
-    /* BOTÓN FLOTANTE WHATSAPP */
-.whatsapp-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #25D366;
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-    cursor: pointer;
-    z-index: 9999;
-    transition: transform 0.2s;
+body {
+  margin: 0;
+  background: #000;
+  color: #f77f00;
+  font-family: Arial, sans-serif;
+  padding-top: 180px;
+  overflow-x: hidden;
 }
 
-.whatsapp-btn:hover {
-    transform: scale(1.1);
+/* =========================
+   TOPBAR
+========================= */
+.topbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #000;
+  text-align: center;
+  padding: 10px 0;
+  z-index: 1000;
 }
 
-/* MINI CHAT FLOTANTE */
-.chat-box {
-    position: fixed;
-    bottom: 100px;
-    right: 20px;
-    width: 260px;
-    background: #000;
-    border: 2px solid #f77f00;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-    padding: 15px;
-    display: none;
-    z-index: 9999;
+.logo {
+  width: 130px;
 }
 
-.chat-box h3 {
-    margin: 0 0 10px 0;
-    color: #f77f00;
-    font-size: 1.1rem;
-    text-align: center;
+/* =========================
+   COUNTDOWN
+========================= */
+#countdownOverlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 99999;
 }
 
-.chat-option {
-    background: #1a1a1a;
-    border: 1px solid #f77f00;
-    padding: 8px 10px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    color: white;
-    cursor: pointer;
-    transition: 0.2s;
-    font-size: 0.9rem;
+.countdown {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 8rem;
+  font-weight: 800;
+  letter-spacing: 0.2rem;
+  color: #fff;
+  animation: glow 1s infinite alternate;
 }
 
-.chat-option:hover {
-    background: #f77f00;
-    color: #000;
+@keyframes glow {
+  from { text-shadow: 0 0 10px #fff; }
+  to   { text-shadow: 0 0 35px #fff; }
 }
 
-.imgbtnwsp {
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
+/* =========================
+   GALERÍA
+========================= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
+.item {
+  background: #111;
+  border: 2px solid #f77f00;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+
+.item.spin {
+  animation: spin 1.5s ease forwards;
+}
+
+@keyframes spin {
+  to { transform: rotateY(720deg); }
+}
+
+.item.fade {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.name {
+  text-align: center;
+  margin-top: 8px;
+  color: #fff;
+}
+
+/* =========================
+   2026 SLIDE IN
+========================= */
+.year-card {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4.5rem;
+  font-weight: 900;
+  color: #fff;
+  opacity: 0;
+  transform: translateX(-40px);
+  animation: slideYear 1s ease forwards;
+  z-index: 5;
+  text-shadow:
+    0 0 15px #fff,
+    0 0 35px #fff;
+}
+
+
+.year-overlay {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.year-overlay .year-card {
+  font-size: 4.5rem;
+  font-weight: 900;
+  color: #fff;
+  animation: slideYear 1s ease forwards;
+  text-shadow:
+    0 0 15px #fff,
+    0 0 35px #fff;
+}
+
+
+
+@keyframes slideYear {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+
+
+
+
+/* =========================
+   CANVAS FX
+========================= */
+#fxCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
 </style>
 </head>
 
 <body>
 
-<!-- TOPBAR -->
-<div class="topbar">
-    <img src="img/LogoRovix-08.png" class="logo" alt="Logo">
-
-    <div class="luces">
-        <div class="luz"></div>
-        <div class="luz"></div>
-        <div class="luz"></div>
-        <div class="luz"></div>
-        <div class="luz"></div>
-    </div>
+<!-- COUNTDOWN -->
+<div id="countdownOverlay">
+  <div id="countText" class="countdown">3</div>
 </div>
 
-<h1>Catálogo de Polos Sublimados y DTF</h1>
-<h2>¡Elige tu preferido para esta Navidad!</h2>
+<canvas id="fxCanvas"></canvas>
+
+<div class="topbar">
+  <img src="img/LogoRovix-08.png" class="logo">
+</div>
+
+<h1 style="text-align:center">Catálogo de Polos</h1>
+<h2 style="text-align:center;color:#ccc">2026 empieza con estilo</h2>
 
 <div id="galeria" class="grid"></div>
-<p id="error" class="error"></p>
 
 <script>
+/* =========================
+   COUNTDOWN
+========================= */
+const overlay = document.getElementById("countdownOverlay");
+const text = document.getElementById("countText");
+
+(function iniciarCountdown(){
+  let count = 3;
+  function step(){
+    text.textContent = count;
+    if(count === 0){
+      overlay.style.opacity = "0";
+      setTimeout(()=>{
+        overlay.remove();
+        cargarGaleria();
+      },800);
+      return;
+    }
+    count--;
+    setTimeout(step,900);
+  }
+  step();
+})();
+
+/* =========================
+   FIREWORKS (AUTO)
+========================= */
+const canvas = document.getElementById("fxCanvas");
+const ctx = canvas.getContext("2d");
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+window.onresize = ()=>{canvas.width=innerWidth;canvas.height=innerHeight};
+
+const particles=[];
+setInterval(()=>{
+  const x=Math.random()*canvas.width;
+  const y=Math.random()*canvas.height;
+  for(let i=0;i<40;i++){
+    particles.push({
+      x,y,
+      vx:(Math.random()-0.5)*5,
+      vy:(Math.random()-0.5)*5,
+      life:60,
+      size:Math.random()*3+2
+    });
+  }
+},1200);
+
+(function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach((p,i)=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fillStyle="rgba(255,255,255,0.8)";
+    ctx.fill();
+    p.x+=p.vx; p.y+=p.vy; p.life--;
+    if(p.life<=0) particles.splice(i,1);
+  });
+  requestAnimationFrame(animate);
+})();
+
+/* =========================
+   GALERÍA
+========================= */
 const API_URL = "https://script.google.com/macros/s/AKfycbzwyh_i7wozL3Ot2gPar0r_5_q0WrbwRJMNDnnlyD_JrpvW7MYu5YLDUSbK1MuZjZd4/exec";
 
-async function cargarGaleria() {
-    try {
-        const response = await fetch(API_URL);
-        if (!response.ok) throw new Error("Error al conectar");
+async function cargarGaleria(){
+  const res = await fetch(API_URL);
+  const images = await res.json();
+  const g = document.getElementById("galeria");
+  g.innerHTML="";
 
-        const images = await response.json();
+  images.forEach((img)=>{
+    const item=document.createElement("div");
+    item.className="item";
+    item.innerHTML=`
+      <img src="${img.url}">
+      <div class="name">${img.name}</div>
+    `;
 
-        const galeria = document.getElementById("galeria");
-        galeria.innerHTML = "";
+   item.onclick = () => {
+  if (item.classList.contains("used")) return;
+  item.classList.add("used");
 
-        images.forEach((img, index) => {
-            const item = document.createElement("div");
-            item.className = "item";
+  const rect = item.getBoundingClientRect();
 
-            item.onclick = () => {
-                window.location.href = `producto.html?img=${encodeURIComponent(img.url)}&name=${encodeURIComponent(img.name)}`;
-            };
+  // Giro
+  item.classList.add("spin");
 
-            item.innerHTML = `
-                <img src="${img.url}" alt="${img.name}">
-                <div class="name">${index + 1}. ${img.name}</div>
-            `;
+  // Crear overlay 2026 ANCLADO al card
+  setTimeout(() => {
+    const overlay = document.createElement("div");
+    overlay.className = "year-overlay";
+    overlay.style.left = rect.left + "px";
+    overlay.style.top = rect.top + "px";
+    overlay.style.width = rect.width + "px";
+    overlay.style.height = rect.height + "px";
 
-            galeria.appendChild(item);
-        });
+    const year = document.createElement("div");
+    year.className = "year-card";
+    year.textContent = "2026";
 
-    } catch (e) {
-        document.getElementById("error").innerText =
-            "Error cargando la galería. Revisa la URL del web app o permisos de Drive.";
-    }
-}
+    overlay.appendChild(year);
+    document.body.appendChild(overlay);
+  }, 1200);
 
-cargarGaleria();
+  // Fade + polvo del card
+  setTimeout(() => {
+    item.classList.add("fade");
+  }, 1800);
 
-/* NIEVE */
-function crearNieve() {
-    const copo = document.createElement("div");
-    copo.classList.add("snowflake");
-    copo.innerHTML = "❄";
-
-    copo.style.left = Math.random() * 100 + "vw";
-    copo.style.fontSize = (Math.random() * 10 + 10) + "px";
-    copo.style.animationDuration = (Math.random() * 5 + 5) + "s";
-
-    document.body.appendChild(copo);
-
-    setTimeout(() => copo.remove(), 12000);
-}
-
-setInterval(crearNieve, 200);
-</script>
-
+  // Redirección
+  setTimeout(() => {
+    location.href = `producto.html?img=${encodeURIComponent(img.url)}&name=${encodeURIComponent(img.name)}`;
+  }, 3200);
+};
 
 
-
-
-
-
-<!-- BOTÓN WA + CHAT -->
-<div class="whatsapp-btn" onclick="toggleChat()">
-    <img class="imgbtnwsp" src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
-         width="35" height="35" alt="WhatsApp">
-</div>
-
-<div id="chatBox" class="chat-box">
-    <h3>¿En qué te ayudo?</h3>
-
-    <div class="chat-option" onclick="sendWsp('Hola Rovix, ¿Aún tienen en stock de los polos?')">
-        ¿Aún tienen en stock?
-    </div>
-
-    <div class="chat-option" onclick="sendWsp('Hola Rovix, ¿Qué precio tienen los polos?')">
-        ¿Qué precio tiene?
-    </div>
-
-    <div class="chat-option" onclick="sendWsp('Hola Rovix, ¿En qué tallas tiene de sus polos?')">
-        ¿En qué tallas tiene?
-    </div>
-
-    <div class="chat-option" onclick="sendWsp('Hola Rovix, ¿Hace envíos de sus polos a nivel nacional?')">
-        ¿Hace envíos a nivel nacional?
-    </div>
-
-    <div class="chat-option" onclick="sendWsp('Hola Rovix, ¿Hacen delivery?')">
-        ¿Hacen delivery?
-    </div>
-</div>
-
-<script>
-const numero = "51997087640"; // <-- TU NÚMERO AQUÍ
-
-function toggleChat() {
-    const box = document.getElementById("chatBox");
-    box.style.display = box.style.display === "block" ? "none" : "block";
-}
-
-function sendWsp(texto) {
-    const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
-    window.open(url, "_blank");
+    g.appendChild(item);
+  });
 }
 </script>
-
-
-
 
 </body>
 </html>
