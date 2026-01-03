@@ -38,12 +38,6 @@
 
 *{box-sizing:border-box}
 
-
-html, body {
-  height: 100%;
-  margin: 0;
-}
-  
 body{
   margin:0;
   font-family:'Segoe UI', Arial, sans-serif;
@@ -143,27 +137,6 @@ header img{
   height:45px;
 }
 
-
-
-
-/* =======================
-   FOOTER
-======================= */
-  .site-footer{
-  padding: 25px 15px;
-  text-align: center;
-  font-size: 0.9rem;
-  color: #aaa;
-  background: #000;
-  border-top: 1px solid #222;
-    
-  box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
-}
-
-  
-
-
-  
 /* HAMBURGUESA */
 .menu-toggle{
   display:none;
@@ -249,8 +222,6 @@ main{
   padding-top:110px;
   max-width:1200px;
   margin:auto;
-  
-  flex: 1;
 }
 
 .section-title{
@@ -417,14 +388,7 @@ main{
 
 
 
-#page-wrapper{
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
 
-
-  
 
 
 
@@ -553,7 +517,7 @@ main{
   }
 
   .grid{
-    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+    grid-template-columns:repeat(2,1fr);
   }
 }
 
@@ -633,8 +597,6 @@ main{
   </div>
 </header>
 
-<!-- 🔽 WRAPPER NUEVO -->
-<div id="page-wrapper">
 <main>
   <h2 class="section-title" id="title">Últimos modelos</h2>
   <div id="galeria" class="grid"></div>
@@ -642,11 +604,6 @@ main{
   <div id="empty" class="empty"></div>
 </main>
 
-<footer class="site-footer">
-  © <span id="year"></span> Rovix Style. Todos los derechos reservados.
-</footer>
-</div>
-  
 
 <!-- MODAL PRODUCTO -->
 <div id="modal" class="modal">
@@ -665,8 +622,6 @@ main{
 </div>
 
 
-
-  
 <script>
 const API="https://script.google.com/macros/s/AKfycbxMSVPX_z9qUqyzeuSKU7ciu0ByGdGOMbbpuRd1U5p5aGLp3GI81N_UDzA53WQFMeYs/exec";
 
@@ -726,7 +681,7 @@ function openModal(img){
     ? [currentCategoria, currentSub].filter(Boolean).join(" / ")
     : "Últimos modelos";
 
-  modalTitle.innerText = `${img.name} | ${categoriaTexto}`;
+  modalTitle.innerText = ${img.name} | ${categoriaTexto};
 
   // ❤️ Estado favorito
   if(isFavorite(img.id)){
@@ -790,12 +745,12 @@ function shareWhatsApp(){
   if(!currentModalImage) return;
 
   const text = encodeURIComponent(
-    `Mira este diseño de Rovix Style:\n${currentModalImage.name}`
+    Mira este diseño de Rovix Style:\n${currentModalImage.name}
   );
 
   const imageUrl = currentModalImage.url;
 
-  const waUrl = `https://wa.me/?text=${text}%0A${imageUrl}`;
+  const waUrl = https://wa.me/?text=${text}%0A${imageUrl};
   window.open(waUrl, "_blank");
 }
 
@@ -908,7 +863,7 @@ function load(categoria, sub=null){
   document.getElementById("title").innerText = titulo;
 
   // ✅ SEO: título dinámico del navegador
-  document.title = `${titulo} | Rovix Style`;
+  document.title = ${titulo} | Rovix Style;
 
   fetchPage(true);
 }
@@ -923,8 +878,8 @@ function loadMore(){
 
 
 function fetchPage(clear){
-  let url = `${API}?categoria=${currentCategoria}&page=${currentPage}&limit=${LIMIT}`;
-  if(currentSub) url += `&sub=${currentSub}`;
+  let url = ${API}?categoria=${currentCategoria}&page=${currentPage}&limit=${LIMIT};
+  if(currentSub) url += &sub=${currentSub};
 
   fetch(url)
     .then(r => r.json())
@@ -960,10 +915,10 @@ function renderImages(images, clear){
   images.forEach(img=>{
   const div = document.createElement("div");
   div.className="item";
-  div.innerHTML=`
+  div.innerHTML=
     <img src="${img.url}" loading="lazy">
     <p>${img.name}</p>
-  `;
+  ;
 
   div.querySelector("img").onclick = () => openModal(img);
   g.appendChild(div);
@@ -971,7 +926,7 @@ function renderImages(images, clear){
 }
 
 
-document.getElementById("year").textContent = new Date().getFullYear();
+
 
 
 home();
@@ -1019,7 +974,7 @@ function toggleChat() {
 }
 
 function sendWsp(texto) {
-    const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+    const url = https://wa.me/${numero}?text=${encodeURIComponent(texto)};
     window.open(url, "_blank");
 }
 </script>
