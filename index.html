@@ -137,6 +137,27 @@ header img{
   height:45px;
 }
 
+
+
+
+/* =======================
+   FOOTER
+======================= */
+.site-footer{
+  margin-top: 60px;
+  padding: 25px 15px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #aaa;
+  background: #000;
+  border-top: 1px solid #222;
+  letter-spacing: 0.3px;
+}
+
+  
+
+
+  
 /* HAMBURGUESA */
 .menu-toggle{
   display:none;
@@ -622,6 +643,10 @@ main{
 </div>
 
 
+<footer class="site-footer">
+  © <span id="year"></span> Rovix Style. Todos los derechos reservados.
+</footer>
+  
 <script>
 const API="https://script.google.com/macros/s/AKfycbxMSVPX_z9qUqyzeuSKU7ciu0ByGdGOMbbpuRd1U5p5aGLp3GI81N_UDzA53WQFMeYs/exec";
 
@@ -926,7 +951,7 @@ function renderImages(images, clear){
 }
 
 
-
+document.getElementById("year").textContent = new Date().getFullYear();
 
 
 home();
