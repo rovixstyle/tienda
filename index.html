@@ -945,7 +945,7 @@ function renderImages(images, clear){
 
 
 
-
+document.getElementById("year").textContent = new Date().getFullYear();
 
 home();
 </script>
@@ -1000,7 +1000,7 @@ function sendWsp(texto) {
 
 
 <footer class="footer">
-  <p>© 2026 Rovix Style — Diseñado para quienes crean su propio camino</p>
+  © <span id="year"></span> Rovix Style — Diseñado para quienes crean su propio camino
 </footer>
 
 </body>
