@@ -45,9 +45,6 @@ html, body {
 }
   
 body{
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
   margin:0;
   font-family:'Segoe UI', Arial, sans-serif;
   background:var(--oscuro);
@@ -253,7 +250,7 @@ main{
   max-width:1200px;
   margin:auto;
   
- 
+  flex: 1;
 }
 
 .section-title{
@@ -420,7 +417,14 @@ main{
 
 
 
+#page-wrapper{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
+
+  
 
 
 
@@ -629,6 +633,8 @@ main{
   </div>
 </header>
 
+<!-- 🔽 WRAPPER NUEVO -->
+<div id="page-wrapper">
 <main>
   <h2 class="section-title" id="title">Últimos modelos</h2>
   <div id="galeria" class="grid"></div>
@@ -636,6 +642,11 @@ main{
   <div id="empty" class="empty"></div>
 </main>
 
+<footer class="site-footer">
+  © <span id="year"></span> Rovix Style. Todos los derechos reservados.
+</footer>
+</div>
+  
 
 <!-- MODAL PRODUCTO -->
 <div id="modal" class="modal">
@@ -654,9 +665,7 @@ main{
 </div>
 
 
-<footer class="site-footer">
-  © <span id="year"></span> Rovix Style. Todos los derechos reservados.
-</footer>
+
   
 <script>
 const API="https://script.google.com/macros/s/AKfycbxMSVPX_z9qUqyzeuSKU7ciu0ByGdGOMbbpuRd1U5p5aGLp3GI81N_UDzA53WQFMeYs/exec";
