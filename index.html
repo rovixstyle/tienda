@@ -484,6 +484,30 @@ main{
 
 
 /* =======================
+   CTA
+======================= */
+
+  .cta-buy{
+  margin-top:15px;
+  padding:14px 22px;
+  background:var(--naranja);
+  color:#000;
+  border:none;
+  border-radius:10px;
+  font-size:1rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.cta-buy:hover{
+  background:#ff9800;
+  transform:scale(1.05);
+}
+
+
+
+/* =======================
    MOBILE DRAWER
 ======================= */
 @media (max-width:768px){
@@ -636,6 +660,16 @@ main{
       <span id="favBtn" class="icon" onclick="toggleFavorite()">♡</span>
       <span class="icon" onclick="shareWhatsApp()">📤</span>
     </div>
+    
+    <button class="cta-buy" onclick="buyWhatsApp()">
+    Pedir este diseño por WhatsApp
+    </button>
+
+    <p style="font-size:.8rem;color:#aaa;margin-top:6px">
+    Diseño por tiempo limitado · Stock sujeto a disponibilidad
+    </p>
+
+
   </div>
 </div>
 
@@ -998,6 +1032,29 @@ function sendWsp(texto) {
     const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
     window.open(url, "_blank");
 }
+
+
+
+
+
+
+function buyWhatsApp(){
+  if(!currentModalImage) return;
+
+  const mensaje = `
+Hola Rovix 👋
+Me interesa este diseño:
+
+🖼 ${currentModalImage.name}
+
+¿Me brindas precio, tallas y disponibilidad?
+`;
+
+  const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+  window.open(url, "_blank");
+}
+
+  
 </script>
 
 
