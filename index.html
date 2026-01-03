@@ -945,7 +945,10 @@ function renderImages(images, clear){
 
 
 
-document.getElementById("year").textContent = new Date().getFullYear();
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("year").textContent = new Date().getFullYear();
+});
+
 
 home();
 </script>
