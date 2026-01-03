@@ -681,7 +681,7 @@ function openModal(img){
     ? [currentCategoria, currentSub].filter(Boolean).join(" / ")
     : "Últimos modelos";
 
-  modalTitle.innerText = ${img.name} | ${categoriaTexto};
+  modalTitle.innerText = `${img.name} | ${categoriaTexto}`;
 
   // ❤️ Estado favorito
   if(isFavorite(img.id)){
@@ -745,12 +745,12 @@ function shareWhatsApp(){
   if(!currentModalImage) return;
 
   const text = encodeURIComponent(
-    Mira este diseño de Rovix Style:\n${currentModalImage.name}
+    `Mira este diseño de Rovix Style:\n${currentModalImage.name}`
   );
 
   const imageUrl = currentModalImage.url;
 
-  const waUrl = https://wa.me/?text=${text}%0A${imageUrl};
+  const waUrl = `https://wa.me/?text=${text}%0A${imageUrl}`;
   window.open(waUrl, "_blank");
 }
 
@@ -863,7 +863,7 @@ function load(categoria, sub=null){
   document.getElementById("title").innerText = titulo;
 
   // ✅ SEO: título dinámico del navegador
-  document.title = ${titulo} | Rovix Style;
+  document.title = `${titulo} | Rovix Style`;
 
   fetchPage(true);
 }
@@ -878,8 +878,8 @@ function loadMore(){
 
 
 function fetchPage(clear){
-  let url = ${API}?categoria=${currentCategoria}&page=${currentPage}&limit=${LIMIT};
-  if(currentSub) url += &sub=${currentSub};
+  let url = `${API}?categoria=${currentCategoria}&page=${currentPage}&limit=${LIMIT}`;
+  if(currentSub) url += `&sub=${currentSub}`;
 
   fetch(url)
     .then(r => r.json())
@@ -915,10 +915,10 @@ function renderImages(images, clear){
   images.forEach(img=>{
   const div = document.createElement("div");
   div.className="item";
-  div.innerHTML=
+  div.innerHTML=`
     <img src="${img.url}" loading="lazy">
     <p>${img.name}</p>
-  ;
+  `;
 
   div.querySelector("img").onclick = () => openModal(img);
   g.appendChild(div);
@@ -974,7 +974,7 @@ function toggleChat() {
 }
 
 function sendWsp(texto) {
-    const url = https://wa.me/${numero}?text=${encodeURIComponent(texto)};
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
     window.open(url, "_blank");
 }
 </script>
