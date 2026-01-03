@@ -38,7 +38,17 @@
 
 *{box-sizing:border-box}
 
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+  
 body{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  
   margin:0;
   font-family:'Segoe UI', Arial, sans-serif;
   background:var(--oscuro);
@@ -143,15 +153,15 @@ header img{
 /* =======================
    FOOTER
 ======================= */
-.site-footer{
-  margin-top: 60px;
+  .site-footer{
   padding: 25px 15px;
   text-align: center;
   font-size: 0.9rem;
   color: #aaa;
   background: #000;
   border-top: 1px solid #222;
-  letter-spacing: 0.3px;
+    
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
 }
 
   
@@ -243,6 +253,8 @@ main{
   padding-top:110px;
   max-width:1200px;
   margin:auto;
+  
+  flex: 1;
 }
 
 .section-title{
