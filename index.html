@@ -774,7 +774,6 @@ window.addEventListener("load",()=>{
     document.getElementById("splash").classList.add("hide");
   },600);
   updateFavoritesMenu();
-  home();
 });
 
 
@@ -884,8 +883,9 @@ function shareWhatsApp(){
   if(!currentModalImage) return;
 
   const text = encodeURIComponent(
-    Mira este diseño de Rovix Style:\n${currentModalImage.name}
+  `Mira este diseño de Rovix Style:\n${currentModalImage.name}`
   );
+
 
   const imageUrl = currentModalImage.url;
 
@@ -1034,11 +1034,11 @@ function loadMore(){
 
 function fetchPage(clear){
   if(firstLoad){
-    showSkeletons(8); // 👈 solo primera carga
+    showSkeletons(8);
   }
 
-  let url = ${API}?categoria=${currentCategoria}&page=${currentPage}&limit=${LIMIT};
-  if(currentSub) url += &sub=${currentSub};
+  let url = `${API}?categoria=${currentCategoria}&page=${currentPage}&limit=${LIMIT}`;
+  if(currentSub) url += `&sub=${currentSub}`;
 
   fetch(url)
     .then(r => r.json())
@@ -1050,9 +1050,10 @@ function fetchPage(clear){
       document.getElementById("loadMore").style.display =
         hasMore ? "block" : "none";
 
-      firstLoad = false; // 👈 nunca más skeleton
+      firstLoad = false;
     });
 }
+
 
 
 
