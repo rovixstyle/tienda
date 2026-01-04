@@ -760,6 +760,7 @@ main{
 <script>
 const API="https://script.google.com/macros/s/AKfycbxSqU_draj3asHnFFPoWrfEm3Fz3Msssy3Sbh5KN2jj-bR0JPcyT79S1xCT5kZ3qcoI/exec";
 
+let firstLoad = true;
 
   
 let currentPage = 1;
@@ -989,20 +990,19 @@ function home(){
 
   document.getElementById("title").innerText="Últimos modelos";
   document.getElementById("loadMore").style.display="none";
+
   document.title = "Rovix Style — Tienda Oficial";
 
-  showSkeletons(8);     // 👈 SKELETON SIEMPRE
-  showLoading();
+  showLoading(); // 👈 MOSTRAR TEXTO
 
   fetch(API)
     .then(r => r.json())
     .then(data => {
       hasMore = false;
       renderImages(data, true);
-      hideLoading();
+      hideLoading(); // 👈 OCULTAR TEXTO
     });
 }
-
 
 
 /* ✅ FUNCIÓN CORREGIDA */
@@ -1015,14 +1015,12 @@ function load(categoria, sub=null){
 
   const titulo = [categoria, sub].filter(Boolean).join(" / ");
   document.getElementById("title").innerText = titulo;
-  document.title = `${titulo} | Rovix Style`;
 
-  showSkeletons(8);   // 👈 SKELETON
-  showLoading();
+  // ✅ SEO: título dinámico del navegador
+  document.title = ${titulo} | Rovix Style;
 
   fetchPage(true);
 }
-
 
 
 
@@ -1034,8 +1032,12 @@ function loadMore(){
 
 
 function fetchPage(clear){
-  let url = `${API}?categoria=${currentCategoria}&page=${currentPage}&limit=${LIMIT}`;
-  if(currentSub) url += `&sub=${currentSub}`;
+  if(firstLoad){
+    showSkeletons(8); // 👈 solo primera carga
+  }
+
+  let url = ${API}?categoria=${currentCategoria}&page=${currentPage}&limit=${LIMIT};
+  if(currentSub) url += &sub=${currentSub};
 
   fetch(url)
     .then(r => r.json())
@@ -1047,10 +1049,9 @@ function fetchPage(clear){
       document.getElementById("loadMore").style.display =
         hasMore ? "block" : "none";
 
-      hideLoading();
+      firstLoad = false; // 👈 nunca más skeleton
     });
 }
-
 
 
 
@@ -1105,14 +1106,13 @@ function showSkeletons(count = 8){
   for(let i = 0; i < count; i++){
     const sk = document.createElement("div");
     sk.className = "skeleton";
-    sk.innerHTML = `
+    sk.innerHTML = 
       <div class="skeleton-img"></div>
       <div class="skeleton-text"></div>
-    `;
+    ;
     grid.appendChild(sk);
   }
 }
-
 
 
 
@@ -1200,7 +1200,6 @@ Me interesa este diseño:
 
   
 </script>
-
 
 
 <footer class="footer">
