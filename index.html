@@ -248,6 +248,21 @@ main{
   margin:30px 0;
 }
 
+
+.loading-text{
+  text-align:center;
+  color:#aaa;
+  font-size:1rem;
+  margin-bottom:20px;
+  opacity:0;
+  transition:opacity .3s ease;
+}
+
+.loading-text.active{
+  opacity:1;
+}
+
+
 .grid{
   display:grid;
   grid-template-columns:repeat(4, minmax(0, 1fr));
@@ -642,6 +657,10 @@ main{
 
 <main>
   <h2 class="section-title" id="title">Últimos modelos</h2>
+  <!-- LOADER TEXTO -->
+  <div id="loadingText" class="loading-text">
+  ⏳ Cargando imágenes…
+  </div>
   <div id="galeria" class="grid"></div>
   <button id="loadMore" onclick="loadMore()" style="display:none">Ver más</button>
   <div id="empty" class="empty"></div>
@@ -881,6 +900,22 @@ function toggleSub(el){
   li.classList.toggle("open");
 }
 
+
+
+
+
+  
+function showLoading(){
+  document.getElementById("loadingText").classList.add("active");
+}
+
+function hideLoading(){
+  document.getElementById("loadingText").classList.remove("active");
+}
+
+
+  
+  
 function home(){
   closeMenu();
   currentCategoria = null;
@@ -890,17 +925,17 @@ function home(){
   document.getElementById("title").innerText="Últimos modelos";
   document.getElementById("loadMore").style.display="none";
 
-  // ✅ SEO HOME
   document.title = "Rovix Style — Tienda Oficial";
 
-  fetch(API)
-  .then(r => r.json())
-  .then(data => {
-    hasMore = false; // Home no usa paginación
-    renderImages(data, true);
-    document.getElementById("loadMore").style.display = "none";
-  });
+  showLoading(); // 👈 MOSTRAR TEXTO
 
+  fetch(API)
+    .then(r => r.json())
+    .then(data => {
+      hasMore = false;
+      renderImages(data, true);
+      hideLoading(); // 👈 OCULTAR TEXTO
+    });
 }
 
 
@@ -931,6 +966,8 @@ function loadMore(){
 
 
 function fetchPage(clear){
+  showLoading(); // 👈 muestra “Cargando imágenes…”
+
   let url = `${API}?categoria=${currentCategoria}&page=${currentPage}&limit=${LIMIT}`;
   if(currentSub) url += `&sub=${currentSub}`;
 
@@ -939,16 +976,15 @@ function fetchPage(clear){
     .then(data => {
       hasMore = data.hasMore;
 
-      if(clear){
-        renderImages(data.images, true);
-      }else{
-        renderImages(data.images, false);
-      }
+      renderImages(data.images, clear); // 👈 MISMA LÓGICA
 
       document.getElementById("loadMore").style.display =
         hasMore ? "block" : "none";
+
+      hideLoading(); // 👈 oculta el texto
     });
 }
+
 
 
 function renderImages(images, clear){
