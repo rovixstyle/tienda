@@ -336,7 +336,15 @@ main{
   grid-template-columns:repeat(4, minmax(0, 1fr));
   gap:25px;
   padding:20px;
+
+  justify-items:stretch; /* 🔥 CLAVE ABSOLUTA */
 }
+
+
+.grid > .item{
+  width:100%;
+}
+
 
 
 .item{
