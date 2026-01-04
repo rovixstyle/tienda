@@ -243,6 +243,10 @@ nav ul ul li:hover a{
   border-radius: 15px;
   overflow: hidden;
   position: relative;
+
+  height: 320px;
+  display:flex;
+  flex-direction:column;
 }
 
 .skeleton-img {
@@ -756,7 +760,7 @@ main{
 <script>
 const API="https://script.google.com/macros/s/AKfycbxSqU_draj3asHnFFPoWrfEm3Fz3Msssy3Sbh5KN2jj-bR0JPcyT79S1xCT5kZ3qcoI/exec";
 
-let firstLoad = true;
+
 
   
 let currentPage = 1;
@@ -986,19 +990,20 @@ function home(){
 
   document.getElementById("title").innerText="Últimos modelos";
   document.getElementById("loadMore").style.display="none";
-
   document.title = "Rovix Style — Tienda Oficial";
 
-  showLoading(); // 👈 MOSTRAR TEXTO
+  showSkeletons(8);     // 👈 SKELETON SIEMPRE
+  showLoading();
 
   fetch(API)
     .then(r => r.json())
     .then(data => {
       hasMore = false;
       renderImages(data, true);
-      hideLoading(); // 👈 OCULTAR TEXTO
+      hideLoading();
     });
 }
+
 
 
 /* ✅ FUNCIÓN CORREGIDA */
@@ -1011,12 +1016,14 @@ function load(categoria, sub=null){
 
   const titulo = [categoria, sub].filter(Boolean).join(" / ");
   document.getElementById("title").innerText = titulo;
-
-  // ✅ SEO: título dinámico del navegador
   document.title = `${titulo} | Rovix Style`;
+
+  showSkeletons(8);   // 👈 SKELETON
+  showLoading();
 
   fetchPage(true);
 }
+
 
 
 
@@ -1028,10 +1035,6 @@ function loadMore(){
 
 
 function fetchPage(clear){
-  if(firstLoad){
-    showSkeletons(8); // 👈 solo primera carga
-  }
-
   let url = `${API}?categoria=${currentCategoria}&page=${currentPage}&limit=${LIMIT}`;
   if(currentSub) url += `&sub=${currentSub}`;
 
@@ -1045,9 +1048,10 @@ function fetchPage(clear){
       document.getElementById("loadMore").style.display =
         hasMore ? "block" : "none";
 
-      firstLoad = false; // 👈 nunca más skeleton
+      hideLoading();
     });
 }
+
 
 
 
