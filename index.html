@@ -819,7 +819,8 @@ function openModal(img){
     ? [currentCategoria, currentSub].filter(Boolean).join(" / ")
     : "Últimos modelos";
 
-  modalTitle.innerText = ${img.name} | ${categoriaTexto};
+  modalTitle.innerText = `${img.name} | ${categoriaTexto}`;
+
 
   // ❤️ Estado favorito
   if(isFavorite(img.id)){
@@ -888,7 +889,7 @@ function shareWhatsApp(){
 
   const imageUrl = currentModalImage.url;
 
-  const waUrl = https://wa.me/?text=${text}%0A${imageUrl};
+  const waUrl = `https://wa.me/?text=${text}%0A${imageUrl}`;
   window.open(waUrl, "_blank");
 }
 
@@ -1017,7 +1018,7 @@ function load(categoria, sub=null){
   document.getElementById("title").innerText = titulo;
 
   // ✅ SEO: título dinámico del navegador
-  document.title = ${titulo} | Rovix Style;
+  document.title = `${titulo} | Rovix Style`;
 
   fetchPage(true);
 }
@@ -1073,10 +1074,11 @@ function renderImages(images, clear){
   images.forEach(img=>{
     const div = document.createElement("div");
     div.className = "item";
-    div.innerHTML = 
-      <img src="${img.url}" loading="lazy">
-      <p>${img.name}</p>
-    ;
+    div.innerHTML = `
+    <img src="${img.url}" loading="lazy">
+    <p>${img.name}</p>
+    `;
+
 
     // ✅ AQUÍ VA
     const image = div.querySelector("img");
@@ -1106,10 +1108,11 @@ function showSkeletons(count = 8){
   for(let i = 0; i < count; i++){
     const sk = document.createElement("div");
     sk.className = "skeleton";
-    sk.innerHTML = 
+    sk.innerHTML = `
       <div class="skeleton-img"></div>
       <div class="skeleton-text"></div>
-    ;
+    `;
+
     grid.appendChild(sk);
   }
 }
