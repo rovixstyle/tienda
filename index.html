@@ -1174,41 +1174,33 @@ home();
 </div>
 
 <script>
-const numero = "51931122426"; // <-- TU NÚMERO AQUÍ
+const numero = "51931122426"; // tu número
 
 function toggleChat() {
-    const box = document.getElementById("chatBox");
-    box.style.display = box.style.display === "block" ? "none" : "block";
+  const box = document.getElementById("chatBox");
+  box.style.display = box.style.display === "block" ? "none" : "block";
 }
 
 function sendWsp(texto) {
-    const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
-    window.open(url, "_blank");
+  const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+  window.open(url, "_blank");
 }
-
-
-
-
-
 
 function buyWhatsApp(){
   if(!currentModalImage) return;
 
-  const mensaje = 
-Hola Rovix 👋
+  const mensaje = `Hola Rovix 👋
 Me interesa este diseño:
 
 🖼 ${currentModalImage.name}
 
-¿Me brindas precio, tallas y disponibilidad?
-;
+¿Me brindas precio, tallas y disponibilidad?`;
 
   const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
   window.open(url, "_blank");
 }
-
-  
 </script>
+
 
 
 <footer class="footer">
