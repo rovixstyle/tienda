@@ -1182,7 +1182,7 @@ function toggleChat() {
 }
 
 function sendWsp(texto) {
-    const url = https://wa.me/${numero}?text=${encodeURIComponent(texto)};
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
     window.open(url, "_blank");
 }
 
@@ -1203,7 +1203,7 @@ Me interesa este diseño:
 ¿Me brindas precio, tallas y disponibilidad?
 ;
 
-  const url = https://wa.me/${numero}?text=${encodeURIComponent(mensaje)};
+  const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
   window.open(url, "_blank");
 }
 
