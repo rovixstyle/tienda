@@ -345,12 +345,11 @@ main{
 
 .item img{
   width:100%;
-  height:260px;
-  object-fit:cover;
-
-  opacity: 0;
-  transition: opacity .4s ease;
+  aspect-ratio: 1 / 1;   /* 👈 fuerza formato cuadrado */
+  object-fit: contain;  /* 👈 NO recorta */
+  background:#fff;      /* opcional, para que no se vea vacío */
 }
+
 
 
 
