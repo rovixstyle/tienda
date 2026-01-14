@@ -1126,6 +1126,31 @@ function showSkeletons(count = 8){
 
 
 
+
+
+
+
+
+function loadFromURL(){
+  const params = new URLSearchParams(window.location.search);
+
+  const categoria = params.get("categoria");
+  const sub = params.get("sub");
+
+  if(categoria){
+    load(categoria, sub);
+  }else{
+    home();
+  }
+}
+
+
+  
+
+
+  
+
+
   
 
   
@@ -1136,7 +1161,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
-home();
+loadFromURL();
 </script>
 
 
