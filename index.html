@@ -989,15 +989,18 @@ function hideLoading(){
   
 function home(){
   closeMenu();
+
   currentCategoria = null;
   currentSub = null;
   currentPage = 1;
 
-  document.getElementById("title").innerText="Últimos modelos";
-  document.getElementById("loadMore").style.display="none";
+  updateURL(); // 👈 limpia la URL
+
+  document.getElementById("title").innerText = "Últimos modelos";
+  document.getElementById("loadMore").style.display = "none";
   document.title = "Rovix Style — Tienda Oficial";
 
-  showSkeletons(8);     // 👈 SKELETON SIEMPRE
+  showSkeletons(8);
   showLoading();
 
   fetch(API)
@@ -1011,23 +1014,27 @@ function home(){
 
 
 
+
 /* ✅ FUNCIÓN CORREGIDA */
-function load(categoria, sub=null){
+function load(categoria, sub = null){
   closeMenu();
 
   currentCategoria = categoria;
   currentSub = sub;
   currentPage = 1;
 
+  updateURL(categoria, sub); // 👈 NUEVO
+
   const titulo = [categoria, sub].filter(Boolean).join(" / ");
   document.getElementById("title").innerText = titulo;
   document.title = `${titulo} | Rovix Style`;
 
-  showSkeletons(8);   // 👈 SKELETON
+  showSkeletons(8);
   showLoading();
 
   fetchPage(true);
 }
+
 
 
 
@@ -1127,6 +1134,22 @@ function showSkeletons(count = 8){
 
 
 
+/* =========================
+   HISTORIAL SPA (ATRÁS / ADELANTE)
+========================= */
+window.addEventListener("popstate", (e) => {
+  if(e.state && e.state.categoria){
+    load(e.state.categoria, e.state.sub);
+  }else{
+    home();
+  }
+});
+
+
+
+
+  
+
 
 
 
@@ -1147,6 +1170,29 @@ function loadFromURL(){
 
   
 
+
+
+
+
+
+
+
+
+
+
+  function updateURL(categoria = null, sub = null){
+  const params = new URLSearchParams();
+
+  if(categoria) params.set("categoria", categoria);
+  if(sub) params.set("sub", sub);
+
+  const newURL =
+    params.toString().length > 0
+      ? `${window.location.pathname}?${params.toString()}`
+      : window.location.pathname;
+
+  history.pushState({ categoria, sub }, "", newURL);
+}
 
   
 
