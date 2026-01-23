@@ -702,9 +702,9 @@ main{
             <li>
               <span class="submenu-title" onclick="toggleSub(this)">San Valentín</span>
               <ul>
-                <li><a onclick="load('Eventos','San Valentín - Polos'); closeMenu();">Polos</a></li>
-                <li><a onclick="load('Eventos','San Valentín - Tazas'); closeMenu();">Tazas</a></li>
-                <li><a onclick="load('Eventos','San Valentín - Cojines'); closeMenu();">Cojines</a></li>
+                <li><a onclick="loadEventos('Eventos','San Valentín','Polos')">Polos</a></li>
+                <li><a onclick="loadEventos('Eventos','San Valentín','Tazas')">Tazas</a></li>
+                <li><a onclick="loadEventos('Eventos','San Valentín','Cojines')">Cojines</a></li>
               </ul>
             </li>
             <li><a onclick="load('Eventos','Día de la Madre'); closeMenu();">Día de la Madre</a></li>
@@ -1205,21 +1205,67 @@ function loadFromURL(){
 
 
 
+function loadEventos(categoria, campania, producto){
+  closeMenu();
 
+  currentCategoria = categoria;
+  currentSub = `${campania} / ${producto}`;
+  currentPage = 1;
 
-  function updateURL(categoria = null, sub = null){
-  const params = new URLSearchParams();
+  updateURL(categoria, campania, producto);
 
-  if(categoria) params.set("categoria", categoria);
-  if(sub) params.set("sub", sub);
+  const titulo = `${categoria} / ${campania} / ${producto}`;
+  document.getElementById("title").innerText = titulo;
+  document.title = `${titulo} | Rovix Style`;
 
-  const newURL =
-    params.toString().length > 0
-      ? `${window.location.pathname}?${params.toString()}`
-      : window.location.pathname;
+  showSkeletons(8);
+  showLoading();
 
-  history.pushState({ categoria, sub }, "", newURL);
+  let url = `${API}?categoria=${encodeURIComponent(categoria)}`
+          + `&campania=${encodeURIComponent(campania)}`
+          + `&producto=${encodeURIComponent(producto)}`
+          + `&page=${currentPage}&limit=${LIMIT}`;
+
+  fetch(url)
+    .then(r => r.json())
+    .then(data => {
+      hasMore = data.hasMore;
+      renderImages(data.images, true);
+      document.getElementById("loadMore").style.display =
+        hasMore ? "block" : "none";
+      hideLoading();
+    });
 }
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  function updateURL(categoria=null, campania=null, producto=null){
+    const params = new URLSearchParams();
+    if(categoria) params.set("categoria", categoria);
+    if(campania) params.set("campania", campania);
+    if(producto) params.set("producto", producto);
+  
+    history.pushState(
+      { categoria, campania, producto },
+      "",
+      params.toString()
+        ? `${location.pathname}?${params.toString()}`
+        : location.pathname
+    );
+  }
+
 
   
 
