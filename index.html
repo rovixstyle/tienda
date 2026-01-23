@@ -796,9 +796,14 @@ const API="https://script.google.com/macros/s/AKfycbxSqU_draj3asHnFFPoWrfEm3Fz3M
   
 let currentPage = 1;
 let currentCategoria = null;
+let currentCampania = null;
+let currentProducto = null;
 let currentSub = null;
 let hasMore = false;
 const LIMIT = 8;
+
+
+
 
 window.addEventListener("load",()=>{
   setTimeout(()=>{
@@ -1064,13 +1069,32 @@ function load(categoria, sub = null){
 
 
 
-
+let loadingMore = false;
 
 function loadMore(){
-  if(!hasMore) return;
+  if(!hasMore || loadingMore) return;
+  loadingMore = true;
+
   currentPage++;
-  fetchPage(false);
+  showLoading();
+
+  const url =
+    `${API}?categoria=${encodeURIComponent(currentCategoria)}`
+  + `&campania=${encodeURIComponent(currentCampania)}`
+  + `&producto=${encodeURIComponent(currentProducto)}`
+  + `&page=${currentPage}&limit=${LIMIT}`;
+
+  fetch(url)
+    .then(r => r.json())
+    .then(data => {
+      hasMore = data.hasMore;
+      renderImages(data.images);
+      document.getElementById("loadMore").style.display =
+        hasMore ? "block" : "none";
+      hideLoading();
+    });
 }
+
 
 
 function fetchPage(clear){
@@ -1209,22 +1233,18 @@ function loadEventos(categoria, campania, producto){
   closeMenu();
 
   currentCategoria = categoria;
-  currentSub = `${campania} / ${producto}`;
+  currentCampania = campania;
+  currentProducto = producto;
   currentPage = 1;
-
-  updateURL(categoria, campania, producto);
-
-  const titulo = `${categoria} / ${campania} / ${producto}`;
-  document.getElementById("title").innerText = titulo;
-  document.title = `${titulo} | Rovix Style`;
 
   showSkeletons(8);
   showLoading();
 
-  let url = `${API}?categoria=${encodeURIComponent(categoria)}`
-          + `&campania=${encodeURIComponent(campania)}`
-          + `&producto=${encodeURIComponent(producto)}`
-          + `&page=${currentPage}&limit=${LIMIT}`;
+  const url =
+    `${API}?categoria=${encodeURIComponent(categoria)}`
+  + `&campania=${encodeURIComponent(campania)}`
+  + `&producto=${encodeURIComponent(producto)}`
+  + `&page=${currentPage}&limit=${LIMIT}`;
 
   fetch(url)
     .then(r => r.json())
@@ -1236,6 +1256,7 @@ function loadEventos(categoria, campania, producto){
       hideLoading();
     });
 }
+
 
 
 
