@@ -247,6 +247,20 @@ nav ul ul ul{
 
 
 
+
+.submenu-title{
+  display:block;
+  padding:10px 18px;
+  color:#fff;
+  cursor:pointer;
+}
+
+.submenu-title:hover{
+  color:var(--naranja);
+}
+
+  
+
 /* =======================
    SKELETON CARDS
 ======================= */
@@ -683,22 +697,18 @@ main{
       <ul>
         <li><a onclick="home()">Inicio</a></li>
 
-        <li>
-          <a onclick="toggleSub(this)">Eventos</a>
+        <li><a onclick="toggleSub(this)">Eventos</a>
           <ul>
-        
             <li>
-              <a onclick="toggleSub(this)">San Valentín</a>
+              <span class="submenu-title" onclick="toggleSub(this)">San Valentín</span>
               <ul>
-                <li><a onclick="load('Eventos','San Valentín - Polos')">Polos</a></li>
-                <li><a onclick="load('Eventos','San Valentín - Tazas')">Tazas</a></li>
-                <li><a onclick="load('Eventos','San Valentín - Cojines')">Cojines</a></li>
+                <li><a onclick="load('Eventos','San Valentín - Polos'); closeMenu();">Polos</a></li>
+                <li><a onclick="load('Eventos','San Valentín - Tazas'); closeMenu();">Tazas</a></li>
+                <li><a onclick="load('Eventos','San Valentín - Cojines'); closeMenu();">Cojines</a></li>
               </ul>
             </li>
-        
-            <li><a onclick="load('Eventos','Día de la Madre')">Día de la Madre</a></li>
-            <li><a onclick="load('Eventos','Día del Padre')">Día del Padre</a></li>
-        
+            <li><a onclick="load('Eventos','Día de la Madre'); closeMenu();">Día de la Madre</a></li>
+            <li><a onclick="load('Eventos','Día del Padre'); closeMenu();">Día del Padre</a></li>
           </ul>
         </li>
 
