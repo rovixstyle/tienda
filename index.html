@@ -1069,11 +1069,10 @@ function load(categoria, sub = null){
 
 
 
-let loadingMore = false;
+
 
 function loadMore(){
-  if(!hasMore || loadingMore) return;
-  loadingMore = true;
+  if(!hasMore) return;
 
   currentPage++;
   showLoading();
