@@ -684,6 +684,31 @@ main{
   }
 }
 
+
+
+
+
+
+
+
+/* =========================
+   FIX DEFINITIVO SUB-SUBMENU
+========================= */
+
+/* estado normal */
+nav ul ul li > a{
+  color:#fff;
+}
+
+/* hover SOLO dentro de submenus */
+nav ul ul li:hover > a{
+  color:#000 !important;
+}
+
+/* evita que nav a:hover afecte a nivel 2 y 3 */
+nav ul ul a:hover{
+  color:#000;
+}
 </style>
 </head>
 
