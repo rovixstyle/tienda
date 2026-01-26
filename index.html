@@ -638,6 +638,13 @@ main{
     background:#111;
   }
 
+
+  nav ul ul ul{
+    left:100%;
+    top:0;
+  }
+
+  
   nav li.open > ul{
     display:block;
   }
@@ -679,7 +686,15 @@ main{
         <li>
           <a onclick="toggleSub(this)">Eventos</a>
           <ul>
-            <li><a onclick="load('Eventos','San Valentín')">San Valentín</a></li>
+            <li>
+              <a onclick="toggleSub(this)">San Valentín</a>
+              <ul>
+                <li><a onclick="load('Eventos','San Valentín','Polos')">Polos</a></li>
+                <li><a onclick="load('Eventos','San Valentín','Tazas')">Tazas</a></li>
+                <li><a onclick="load('Eventos','San Valentín','Cojines')">Cojines</a></li>
+              </ul>
+            </li>
+
             <li><a onclick="load('Eventos','Día de la Madre')">Día de la Madre</a></li>
             <li><a onclick="load('Eventos','Día del Padre')">Día del Padre</a></li>
           </ul>
@@ -770,8 +785,9 @@ const API="https://script.google.com/macros/s/AKfycbxSqU_draj3asHnFFPoWrfEm3Fz3M
 let currentPage = 1;
 let currentCategoria = null;
 let currentSub = null;
+let currentSub2 = null;
 let hasMore = false;
-const LIMIT = 8;
+const LIMIT = 20;
 
 window.addEventListener("load",()=>{
   setTimeout(()=>{
@@ -1016,24 +1032,26 @@ function home(){
 
 
 /* ✅ FUNCIÓN CORREGIDA */
-function load(categoria, sub = null){
+function load(categoria, sub = null, sub2 = null){
   closeMenu();
 
   currentCategoria = categoria;
   currentSub = sub;
+  currentSub2 = sub2;
   currentPage = 1;
 
-  updateURL(categoria, sub); // 👈 NUEVO
+  updateURL(categoria, sub, sub2);
 
-  const titulo = [categoria, sub].filter(Boolean).join(" / ");
+  const titulo = [categoria, sub, sub2].filter(Boolean).join(" / ");
   document.getElementById("title").innerText = titulo;
   document.title = `${titulo} | Rovix Style`;
 
-  showSkeletons(8);
+  showSkeletons(20);
   showLoading();
 
   fetchPage(true);
 }
+
 
 
 
@@ -1049,6 +1067,8 @@ function loadMore(){
 function fetchPage(clear){
   let url = `${API}?categoria=${currentCategoria}&page=${currentPage}&limit=${LIMIT}`;
   if(currentSub) url += `&sub=${currentSub}`;
+  if(currentSub2) url += `&sub2=${currentSub2}`;
+
 
   fetch(url)
     .then(r => r.json())
@@ -1159,13 +1179,15 @@ function loadFromURL(){
 
   const categoria = params.get("categoria");
   const sub = params.get("sub");
+  const sub2 = params.get("sub2");
 
   if(categoria){
-    load(categoria, sub);
+    load(categoria, sub, sub2);
   }else{
     home();
   }
 }
+
 
 
   
@@ -1180,19 +1202,21 @@ function loadFromURL(){
 
 
 
-  function updateURL(categoria = null, sub = null){
-  const params = new URLSearchParams();
+  function updateURL(categoria = null, sub = null, sub2 = null){
+    const params = new URLSearchParams();
+  
+    if(categoria) params.set("categoria", categoria);
+    if(sub) params.set("sub", sub);
+    if(sub2) params.set("sub2", sub2);
+  
+    const newURL =
+      params.toString().length > 0
+        ? `${window.location.pathname}?${params.toString()}`
+        : window.location.pathname;
+  
+    history.pushState({ categoria, sub, sub2 }, "", newURL);
+  }
 
-  if(categoria) params.set("categoria", categoria);
-  if(sub) params.set("sub", sub);
-
-  const newURL =
-    params.toString().length > 0
-      ? `${window.location.pathname}?${params.toString()}`
-      : window.location.pathname;
-
-  history.pushState({ categoria, sub }, "", newURL);
-}
 
   
 
