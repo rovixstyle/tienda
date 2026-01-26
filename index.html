@@ -691,6 +691,19 @@ main{
 
 
 
+
+
+
+
+
+
+
+
+
+
+  
+
+
 /* =========================
    FIX DEFINITIVO SUB-SUBMENU
 ========================= */
@@ -709,6 +722,52 @@ nav ul ul li:hover > a{
 nav ul ul a:hover{
   color:#000;
 }
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   FIX REAL SUB-SUBMENU
+========================= */
+
+/* asegurar stacking */
+nav ul ul{
+  z-index: 1000;
+}
+
+nav ul ul ul{
+  z-index: 2000;
+  background: #111;
+}
+
+/* asegurar que esté por encima y clickable */
+nav ul ul ul li{
+  position: relative;
+  z-index: 2001;
+}
+
+/* texto SIEMPRE visible */
+nav ul ul ul a{
+  color: #fff !important;
+  white-space: nowrap;
+}
+
+/* hover correcto */
+nav ul ul ul li:hover{
+  background: var(--naranja);
+}
+
+nav ul ul ul li:hover > a{
+  color: #000 !important;
+}
+
 </style>
 </head>
 
