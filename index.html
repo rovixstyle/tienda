@@ -676,6 +676,47 @@ main{
   .grid{
     grid-template-columns:repeat(2,1fr);
   }
+
+
+
+
+
+
+
+/* =========================
+   FIX SUBMENUS MOBILE
+========================= */
+
+/* evita el fondo naranja gigante */
+nav ul ul li:hover{
+  background: transparent;
+}
+
+/* fondo correcto del submenu */
+nav ul ul{
+  background:#111;
+}
+
+/* items normales */
+nav ul ul li{
+  background:#111;
+}
+
+/* hover simulado en mobile */
+nav ul ul li:active{
+  background: var(--naranja);
+}
+
+nav ul ul li:active > a{
+  color:#000;
+}
+
+
+
+
+
+
+  
 }
 
 @media (max-width:480px){
