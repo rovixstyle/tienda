@@ -1002,12 +1002,14 @@ function openModal(img){
 
 
   // ❤️ Estado favorito
-  if(isFavorite(img.id)){
+  if (isFavorite(img.id)) {
     favBtn.classList.add("active");
     favBtn.innerText = "⭐";
-  }else{
+    favBtn.title = "Quitar de favoritos";
+  } else {
     favBtn.classList.remove("active");
     favBtn.innerText = "✰";
+    favBtn.title = "Marcar como favorito";
   }
 
   modal.classList.add("active");
