@@ -87,54 +87,6 @@ body{
   visibility:visible;
 }
 
-
-
-
-
-  .grupo-header{
-    width:100%;
-    cursor:pointer;
-    padding:18px 10px;
-    font-size:1.4rem;
-    color:var(--naranja);
-    border-bottom:1px solid #222;
-    user-select:none;
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-
-
-
-  .grupo-header:hover{
-    background:#111;
-  }
-
-  
-  .grupo-contenido{
-    display:none;
-    width:100%;
-    margin-bottom:30px;
-  }
-  
-  .grupo-contenido.open{
-    display:block; /* 👈 NO grid */
-  }
-
-
-
-
-   .grupo-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
-    gap:25px;
-    padding:20px;
-  }
-
-
-
-  
-
 /* =======================
    SPLASH PROFESIONAL
 ======================= */
@@ -403,7 +355,7 @@ main{
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns:repeat(4, minmax(0, 1fr));
   gap:25px;
   padding:20px;
 }
@@ -1232,7 +1184,7 @@ function home(){
     .then(r => r.json())
     .then(data => {
       hasMore = false;
-      renderEventoAgrupado(data);
+      renderImages(data, true);
       hideLoading();
     });
 }
@@ -1400,55 +1352,6 @@ function loadFromURL(){
 
 
   
-
-function renderEventoAgrupado(data){
-  const g = document.getElementById("galeria");
-  g.innerHTML = "";
-
-  Object.keys(data).forEach(categoria => {
-    const section = document.createElement("div");
-
-    section.innerHTML = `
-      <div class="grupo-header" onclick="toggleGrupo(this)">
-        <span class="arrow">▶</span> ${categoria}
-      </div>
-      <div class="grupo-contenido grupo-grid"></div>
-    `;
-
-    const content = section.querySelector(".grupo-contenido");
-
-    data[categoria].forEach(img => {
-      const div = document.createElement("div");
-      div.className = "item";
-      div.innerHTML = `
-        <img src="${img.url}" loading="lazy">
-        <p>${img.name}</p>
-      `;
-      div.querySelector("img").onclick = () => openModal(img);
-      content.appendChild(div);
-    });
-
-    g.appendChild(section);
-  });
-}
-
-
-
-
-function toggleGrupo(el){
-  document.querySelectorAll(".grupo-contenido.open").forEach(g=>{
-    if(g !== el.nextElementSibling){
-      g.classList.remove("open");
-      g.previousElementSibling.querySelector(".arrow").textContent = "▷";
-    }
-  });
-
-  const content = el.nextElementSibling;
-  const arrow = el.querySelector(".arrow");
-
-  const abierto = content.classList.toggle("open");
-  arrow.textContent = abierto ? "▽" : "▷";
-}
 
 
 
