@@ -115,15 +115,21 @@ body{
     display:none;
     width:100%;
     margin-bottom:30px;
-    display:none !important;
   }
   
   .grupo-contenido.open{
-    display:grid !important;
+    display:grid;
   }
 
 
- 
+
+   .grupo-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+    gap:25px;
+    padding:20px;
+  }
+
 
   
 
@@ -1404,7 +1410,7 @@ function renderEventoAgrupado(data){
       <div class="grupo-header" onclick="toggleGrupo(this)">
         <span class="arrow">▶</span> ${categoria}
       </div>
-      <div class="grupo-contenido grid"></div>
+      <div class="grupo-contenido grupo-grid"></div>
     `;
 
     const content = section.querySelector(".grupo-contenido");
