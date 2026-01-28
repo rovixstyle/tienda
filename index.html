@@ -92,9 +92,10 @@ body{
 
 
   .grupo-header{
+    width:100%;
     cursor:pointer;
-    padding:15px;
-    font-size:1.3rem;
+    padding:18px 10px;
+    font-size:1.4rem;
     color:var(--naranja);
     border-bottom:1px solid #222;
     user-select:none;
@@ -102,14 +103,14 @@ body{
   
   .grupo-contenido{
     display:none;
-    grid-template-columns:repeat(auto-fill, minmax(220px,1fr));
-    gap:20px;
-    padding:20px;
+    width:100%;
+    margin-bottom:30px;
   }
   
   .grupo-contenido.open{
-    display:grid;
+    display:grid; /* 👈 usa el grid original */
   }
+
   
 
 /* =======================
@@ -1389,7 +1390,7 @@ function renderEventoAgrupado(data){
       <div class="grupo-header" onclick="toggleGrupo(this)">
         <span class="arrow">▷</span> ${categoria}
       </div>
-      <div class="grupo-contenido"></div>
+      <div class="grupo-contenido grid"></div>
     `;
 
     const content = section.querySelector(".grupo-contenido");
@@ -1411,13 +1412,22 @@ function renderEventoAgrupado(data){
 
 
 
+
 function toggleGrupo(el){
+  document.querySelectorAll(".grupo-contenido.open").forEach(g=>{
+    if(g !== el.nextElementSibling){
+      g.classList.remove("open");
+      g.previousElementSibling.querySelector(".arrow").textContent = "▷";
+    }
+  });
+
   const content = el.nextElementSibling;
   const arrow = el.querySelector(".arrow");
 
   const abierto = content.classList.toggle("open");
   arrow.textContent = abierto ? "▽" : "▷";
 }
+
 
 
 
