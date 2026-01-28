@@ -99,17 +99,31 @@ body{
     color:var(--naranja);
     border-bottom:1px solid #222;
     user-select:none;
+    display:flex;
+    align-items:center;
+    gap:10px;
   }
+
+
+
+  .grupo-header:hover{
+    background:#111;
+  }
+
   
   .grupo-contenido{
     display:none;
     width:100%;
     margin-bottom:30px;
+    display:none !important;
   }
   
   .grupo-contenido.open{
-    display:grid; /* 👈 usa el grid original */
+    display:grid !important;
   }
+
+
+ 
 
   
 
@@ -381,7 +395,7 @@ main{
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(4, minmax(0, 1fr));
+  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
   gap:25px;
   padding:20px;
 }
@@ -1388,7 +1402,7 @@ function renderEventoAgrupado(data){
 
     section.innerHTML = `
       <div class="grupo-header" onclick="toggleGrupo(this)">
-        <span class="arrow">▷</span> ${categoria}
+        <span class="arrow">▶</span> ${categoria}
       </div>
       <div class="grupo-contenido grid"></div>
     `;
